@@ -1,25 +1,6 @@
-<div class="sticky-top custom-navbtn">
-  <div class="row">
-    <div class="col-xs-6" *ngIf="navbarSelected">
-        <ul class="list-group">
-            <li class="list-group-item active">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-          </ul>
-    </div>
-    <div class="col-xs-3" (click)="toggleNavbar()">
-        <span class="btn btn-primary">
-            <i class="fa fa-bars"
-            [class.fa-bars] = "!navbarSelected"
-            [class.fa-times] = "navbarSelected"
-            aria-hidden="true"></i>
-        </span>
-    </div>
-  </div>  
-    
-</div>
+
+
+<app-custom-navbar></app-custom-navbar>
 <div>
   <router-outlet></router-outlet>
 </div>

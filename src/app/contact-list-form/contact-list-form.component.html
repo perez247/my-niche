@@ -1,0 +1,35 @@
+<form name="contact" #contact="ngForm" (ngSubmit)="submit(contact.value)">
+              
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="phone">Phone *</label>
+          <input name="phone" 
+          required digits
+          [(ngModel)]="myContacts && myContacts.phone" #phone="ngModel" type="input" class="form-control">
+          <div class="alert alert-danger" *ngIf="phone.touched && phone.invalid">
+              <div *ngIf="phone.errors.required">Phone is require d</div>
+              <div *ngIf="phone.errors.digits">Value is not a Phone</div>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input name="email" 
+          required email
+          [(ngModel)]="myContacts && myContacts.email" #email="ngModel" type="input" class="form-control">
+          <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.email">Value is not an email</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <app-social-account-form (updated)="socailAccountAdded($event)" [myContacts]="myContacts"></app-social-account-form>
+    
+    <p><button class="btn btn-primary">save</button></p>
+  </form>

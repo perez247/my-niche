@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-12">
+
+      <hr>
+      <div class="form-group">
+        <h5>Added social account <small>(Click on icon to remove, then save)</small> </h5>
+        <p class="social-media"  >
+          <ng-container 
+          *ngIf="myContacts && myContacts.socialAccounts && myContacts.socialAccounts.length > 0; then icons; else noIcons"></ng-container>
+          <ng-template #icons>
+            <i *ngFor="let c of myContacts.socialAccounts" 
+            (click)="removeSocialAccount(c)"
+            class= 'fa {{ c.faIcon }}'
+            ></i>
+          </ng-template>
+          <ng-template #noIcons>
+              <small>You have not added any social account yet...</small>
+          </ng-template>
+        </p>
+      </div>
+      <hr>
+
+
+
+      <div class="form-group">
+        <h5>Add new social account</h5>
+        <div class="row">
+
+          <div class="col-sm-6">
+            <label for="socialAccount">Url of social account</label>
+            <input required url ngModel #url="ngModel" name="url" type="input" class="form-control"> 
+            <div class="alert alert-danger" *ngIf="url.touched && url.invalid">
+                <div *ngIf="url.errors.required">Url is required</div>
+                <div *ngIf="url.errors.url">Value is not a valid Url</div>
+              </div>     
+          </div>
+
+          <div class="col-sm-6"> 
+
+            <label for="socialAccount">Social Account</label>
+
+            <div class="input-group mb-3">
+
+              <!-- <input type="text" #faIcon class="form-control" placeholder="e.g. fa-facebook"> -->
+              <select required ngModel class="form-control" #faIcon="ngModel">
+                <option value="">--</option>
+                  <option *ngFor="let s of availableSocialAccounts$ | async" [value]="s.value">
+                    {{s.key}}
+                  </option>
+              </select>
+
+              <div class="input-group-prepend">
+                <span *ngIf="(!url.invalid && !faIcon.invalid)" class="input-group-text bg-success btn btn-success" (click)="addSocailAccount(url,faIcon)">
+                  <i href="#" class="fa fa-plus"></i>
+                </span>
+              </div>
+            </div> 
+
+            <div class="alert alert-danger" *ngIf="faIcon.touched && faIcon.invalid">
+              <div>Social account is required</div>
+            </div> 
+
+          </div>
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <hr>

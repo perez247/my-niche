@@ -1,3 +1,25 @@
-<p>
-  custom-navbar works!
-</p>
+<div class="sticky-top custom-navbtn">
+    <div class="row">
+      <div class="col-xs-6" *ngIf="navbarSelected" (click)="toggleNavbar()">
+          <div class="list-group">
+
+              <a routerLink="/" class="list-group-item list-group-item-action active">
+                <h1>A-P-E</h1>
+              </a>
+              <a routerLink="/resume" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+              <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+              <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+              <a routerLink="/admin" class="list-group-item list-group-item-action">Admin</a>
+            </div>
+      </div>
+      <div class="col-xs-3" (click)="toggleNavbar()">
+          <span class="btn btn-primary">
+              <i class="fa fa-bars"
+              [class.fa-bars] = "!navbarSelected"
+              [class.fa-times] = "navbarSelected"
+              aria-hidden="true"></i>
+          </span>
+      </div>
+    </div>  
+      
+  </div>

@@ -1,0 +1,39 @@
+<form #f="ngForm" (ngSubmit)="submit(f.value)">
+              
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="firstName">First Name *</label>
+          <input name="firstName" 
+          [(ngModel)] ="personalDetails && personalDetails.firstName"
+          required
+          #firstName="ngModel" type="input" class="form-control">
+          <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">First Name is required</div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="lastName">Last Name *</label>
+          <input name="lastName" 
+          [(ngModel)] ="personalDetails && personalDetails.lastName"
+          required
+          #lastName="ngModel" type="input" class="form-control">
+          <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">Last Name is required</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="otherName">Other Name</label>
+          <input name="otherName" 
+          [(ngModel)] ="personalDetails && personalDetails.otherName"
+          required
+          #otherName="ngModel" type="input" class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <button [disabled]="!f.valid" class="btn btn-primary">save</button>
+  </form>

@@ -1,0 +1,14 @@
+
+    <div class="card">
+      <div class="card-header" (click)="selected(ex)">
+          <h5>{{ ex.start_date+' to '+ex.end_date }}</h5>
+          <h5 >{{ ex.role }}</h5>
+          <h6>{{ ex.companyName }}, <small class="card-subtitle text-muted">{{ ex.location }}</small></h6>
+      </div>
+      <div class="card-footer">
+        <button 
+          (click)="deleteWork(ex.key)"
+          class="btn btn-danger">Delete
+        </button>
+      </div>
+    </div>

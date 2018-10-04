@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./custom-navbar.component.css']
 })
 export class CustomNavbarComponent implements OnInit {
+  navbarSelected = false;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  toggleNavbar() {
+    this.navbarSelected = !this.navbarSelected;
   }
 
 }

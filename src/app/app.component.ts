@@ -7,10 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-niche';
-  navbarSelected = false;
-
-  toggleNavbar() {
-    this.navbarSelected = !this.navbarSelected;
-    console.log(this.navbarSelected);
-  }
 }
