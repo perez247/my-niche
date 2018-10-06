@@ -1,0 +1,57 @@
+
+<form #f="ngForm" (ngSubmit)="submit(f)">
+  <div class="form-group">
+    <label for="description">Description *</label>
+    <input 
+      [(ngModel)]="project && project.description"
+      #description = "ngModel"
+      name="description"
+      type="text" 
+      class="form-control"
+      required
+      >
+      <div 
+        class="alert alert-danger"
+        *ngIf="description.touched && description.invalid">This field is required</div>
+  </div>
+  <div class="form-group">
+    <label for="achievement">Achievement *</label>
+    <textarea 
+      required
+      [(ngModel)]="project && project.achievements"
+      #achievements = "ngModel"
+      name="achievements"
+      class="form-control" rows="3"></textarea>
+      <div 
+        class="alert alert-danger"
+        *ngIf="achievements.touched && achievements.invalid">This field is required</div>
+
+        <div class="form-group">
+            <label for="link">Link to project</label>
+            <input 
+             [(ngModel)]="project && project.link"
+              url
+              #link = "ngModel"
+              name="link"
+              type="text" 
+              class="form-control">
+              <div 
+                class="alert alert-danger"
+                *ngIf="link.value!=='' && link.touched && link.invalid">Invalid url</div>
+          </div>
+  </div>
+
+  <input [(ngModel)]="project && project.key" name="key" type="hidden">
+
+  <button [disabled]="!f.valid" class="btn btn-primary">Save</button>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let pP of projects$ | async">
+        <app-personal-project-card [project]="pP" (selected)="projectSelected($event)"></app-personal-project-card>
+    </div>
+  </div>
+
+</form>
+

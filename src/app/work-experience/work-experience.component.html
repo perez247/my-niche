@@ -104,14 +104,14 @@
           </div>
       </div>
       <input type="hidden" formControlName="key" name="key">
-
-      <button class="btn btn-primary">Save</button>
+      
+      <button [disabled]="form.invalid" class="btn btn-primary">Save</button>
   </form>
 
   <div class="container">
       <div class="row">
           <!-- <app-exp-card [ex]="ex"></app-exp-card> -->
-          <div class="col-sm-4 exp-card" *ngFor="let ex of experience$ | async">
+          <div class="col-sm-4 exp-card" *ngFor="let ex of experiences$ | async">
               <app-exp-card [ex]="ex" (selectedEx)="displaySelected($event)"></app-exp-card>
           </div>
       </div>

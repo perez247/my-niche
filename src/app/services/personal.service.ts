@@ -10,7 +10,7 @@ export class PersonalService {
   constructor(private ngDb: AngularFireDatabase) { }
 
   save(personalDetails) {
-    return this.ngDb.object('/public/personal-details').set(personalDetails);
+    return this.ngDb.object('/public/personal-details').set(personalDetails).then(e => true).catch(e => false);
   }
 
   get() {

@@ -5,12 +5,12 @@ import * as _ from 'lodash';
 export class DateValidator {
 
     static invalidDate(c: AbstractControl): ValidationErrors | null {
-        const state = DateValidator.hackFix(c);
-        if (!state.state || !moment(c.value).isValid) {
+
+        if (!moment(c.value, moment.ISO_8601, true).isValid()) {
         return {invalidDateFormat: true};
         }
 
-        if (moment().isBefore(moment(state.value))) {
+        if (moment().isBefore(moment(c.value, moment.ISO_8601, true))) {
             return {invalidDateLogic: true};
         }
 
@@ -20,8 +20,8 @@ export class DateValidator {
     static compareDates(g: AbstractControl): ValidationErrors | null {
         if (
             g.parent === undefined ||
-            typeof g.parent.get('startDate').value !== 'object' ||
-            typeof g.parent.get('endDate').value !== 'object'
+            !moment(g.parent.get('startDate').value, moment.ISO_8601, true).isValid() ||
+            !moment(g.parent.get('endDate').value, moment.ISO_8601, true).isValid()
             ) { return null; }
 
         const startDate = g.parent.get('startDate');
@@ -33,20 +33,24 @@ export class DateValidator {
          return null;
     }
 
-    static hackFix(c: AbstractControl): {state, value?} {
+    // static hackFix(c: AbstractControl): {state, value?} {
 
-        if (typeof c.value !== 'object' || !['year', 'month', 'day'].every(p => p in c.value)) {
-            return { state: false};
-         }
+    //     if (typeof c.value !== 'object' || !['year', 'month', 'day'].every(p => p in c.value)) {
+    //         return { state: false};
+    //      }
 
-         c = DateValidator.rM(c);
-         return {state: true, value: c.value};
-    }
+    //     //  const value = DateValidator.rM(c.value);
+    //      const value = c.value;
+    //      return {state: true, value};
+    // }
 
-    static rM(c: AbstractControl) { // rM = Reduce Month
-        c.value.month = c.value.month - 1;
-        return c;
-    }
+    // static rM(c) { // rM = Reduce Month
+    //     return { year: c.year, month: (c.month - 1), day: c.day };
+    // }
 
-    // static dateDiffs
+    // static aM(c) { // aM = Add Month
+    //     return { year: c.year, month: (c.month + 1), day: c.day };
+    // }
+
+    // // static dateDiffs
 }

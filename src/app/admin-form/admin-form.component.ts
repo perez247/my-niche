@@ -28,7 +28,9 @@ export class AdminFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.homeService.getPublic().subscribe(x => this.publicDetails = x );
+    this.subscription = this.homeService.getPublic().subscribe(x => {
+      this.publicDetails = x;
+    });
   }
 
   ngOnDestroy() {

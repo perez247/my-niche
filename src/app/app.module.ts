@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { CustomFormsModule } from 'ng2-validation';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 
 import { environment } from './../environments/environment';
 import { AboutMeComponent } from './about-me/about-me.component';
@@ -25,6 +26,8 @@ import { SocialAccountService } from './services/social-account.service';
 import { WorkExService } from './services/work-ex.service';
 import { SocialAccountFormComponent } from './social-account-form/social-account-form.component';
 import { WorkExperienceComponent } from './work-experience/work-experience.component';
+import { PersonalProjectFormComponent } from './personal-project-form/personal-project-form.component';
+import { PersonalProjectCardComponent } from './personal-project-card/personal-project-card.component';
 
 @NgModule({
   declarations: [
@@ -39,10 +42,13 @@ import { WorkExperienceComponent } from './work-experience/work-experience.compo
     ContactsComponent,
     SocialAccountFormComponent,
     WorkExperienceComponent,
-    ExpCardComponent
+    ExpCardComponent,
+    PersonalProjectFormComponent,
+    PersonalProjectCardComponent
   ],
   imports: [
     BrowserModule,
+    SnotifyModule,
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
@@ -63,7 +69,9 @@ import { WorkExperienceComponent } from './work-experience/work-experience.compo
     SocialAccountService,
     HomeService,
     WorkExService,
-    // {provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}
+    {provide: NgbDateAdapter, useClass: NgbDateNativeAdapter},
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService
   ],
   bootstrap: [AppComponent]
 })
