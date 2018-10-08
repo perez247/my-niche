@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="card-header" (click)="selected(certification)">
+        <h6>{{ certification.name }}</h6>
+        <p>{{ certification.id }} 
+          <a *ngIf="certification.link" 
+            href="{{certification.link}}"
+            target="_blank"
+          >link</a>
+        </p>
+    </div>
+    <div class="card-footer">
+      <button 
+        (click)="deleteCertification(certification.key)"
+        class="btn btn-danger">Delete
+      </button>
+    </div>
+  </div>

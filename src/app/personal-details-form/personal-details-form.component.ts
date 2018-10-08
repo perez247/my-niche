@@ -1,6 +1,8 @@
+import { DisplayService } from './../services/display.service';
+import { AppPersonalDetails } from './../models/app-personal-details';
 import { PersonalService } from './../services/personal.service';
 import { Component, OnInit, Input } from '@angular/core';
-import {SnotifyService} from 'ng-snotify';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-personal-details-form',
@@ -8,23 +10,19 @@ import {SnotifyService} from 'ng-snotify';
   styleUrls: ['./personal-details-form.component.css']
 })
 export class PersonalDetailsFormComponent implements OnInit {
-  @Input('personalDetails') personalDetails;
+  @Input('personalDetails') personalDetails: AppPersonalDetails;
 
-  constructor(private personalService: PersonalService, private toaster: SnotifyService) { }
+  constructor(private personalService: PersonalService, private toaster: DisplayService) { }
 
   ngOnInit() {
 
   }
 
-  submit(form) {
-    this.personalService.save(form).then(x =>
-
-    this.toaster.success('Save made successfully', {
-      timeout: 2000,
-      showProgressBar: true,
-      closeOnClick: false,
-      pauseOnHover: true
-    }));
+  submit(form: NgForm) {
+    // console.log(form.value as AppPersonalDetails);
+    this.personalService.save(form.value)
+    .then(x => this.toaster.success())
+    .catch(e => this.toaster.error());
   }
 
 }

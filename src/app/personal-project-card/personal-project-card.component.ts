@@ -1,5 +1,5 @@
-import { PersonalProjectService } from './../services/personal-project.service';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DisplayService } from './../services/display.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-personal-project-card',
@@ -9,8 +9,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class PersonalProjectCardComponent implements OnInit {
   @Input('project') project;
   @Output('selected') selected = new EventEmitter();
+  @Output('deleteSelectedProject') deleteSelectedProject = new EventEmitter();
 
-  constructor(private pProjectSevice: PersonalProjectService) { }
+  constructor(private toaster: DisplayService) { }
 
   ngOnInit() {
   }
@@ -21,7 +22,17 @@ export class PersonalProjectCardComponent implements OnInit {
   }
 
   deleteProject(project) {
-    this.pProjectSevice.delete(project.key);
+
+    this.toaster.notifier.confirm('Are you sure', 'Delete', {
+      buttons: [
+        {text: 'Nope!', action: (toast) => this.toaster.notifier.remove(toast.id) },
+        {text: 'Yes, Please!', action: (toast) => {
+          this.deleteSelectedProject.emit(project.key);
+          this.toaster.notifier.remove(toast.id);
+        } }
+      ]
+    });
+
   }
 
 }

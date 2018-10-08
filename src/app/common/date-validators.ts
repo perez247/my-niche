@@ -10,6 +10,11 @@ export class DateValidator {
         return {invalidDateFormat: true};
         }
 
+        return null;
+    }
+
+    static notFuture(c: AbstractControl): ValidationErrors | null {
+
         if (moment().isBefore(moment(c.value, moment.ISO_8601, true))) {
             return {invalidDateLogic: true};
         }

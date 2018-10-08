@@ -4,11 +4,20 @@
 
 
   <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-    <ngb-panel title="Personal Detail">
+    <ngb-panel title="Profile">
       <ng-template ngbPanelContent>
-        <app-personal-details-form [personalDetails]="publicDetails['personal-details']"></app-personal-details-form>
+        <app-profile-form [profile]="publicDetails['profile']"></app-profile-form>
       </ng-template>
     </ngb-panel>
+
+    <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <span>Personal Detail</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+            <app-personal-details-form [personalDetails]="publicDetails['personal-details']"></app-personal-details-form>
+        </ng-template>
+      </ngb-panel>
 
     <ngb-panel>
       <ng-template ngbPanelTitle>
@@ -34,6 +43,39 @@
       </ng-template>
     </ngb-panel>
 
+    <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <span>Skills</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+
+            <app-skills-form></app-skills-form>
+
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+          <ng-template ngbPanelTitle>
+            <span>Certifications</span>
+          </ng-template>
+          <ng-template ngbPanelContent>
+  
+              <app-certification-form></app-certification-form>
+  
+          </ng-template>
+        </ngb-panel>
+
+        <ngb-panel>
+            <ng-template ngbPanelTitle>
+              <span>Education</span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+    
+                <app-education-form></app-education-form>
+    
+            </ng-template>
+          </ngb-panel>
+        
   </ngb-accordion>
 
 </div>

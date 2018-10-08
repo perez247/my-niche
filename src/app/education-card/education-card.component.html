@@ -1,0 +1,15 @@
+<div class="card">
+    <div class="card-header" (click)="selected(education)">
+        <h5>{{ education.start_date+' to '+education.end_date }}</h5>
+        <h5 >{{ education.courseOfStudy }} 
+          <span *ngIf="education.grade">({{ education.grade }})</span>
+        </h5>
+        <h6>{{ education.institution }}, <small class="card-subtitle text-muted">{{ education.location }}</small></h6>
+    </div>
+    <div class="card-footer">
+      <button 
+        (click)="deleteEducation(education.key)"
+        class="btn btn-danger">Delete
+      </button>
+    </div>
+  </div>

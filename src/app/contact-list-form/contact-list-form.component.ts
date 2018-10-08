@@ -1,8 +1,9 @@
-import { AppContacts } from './../models/app-contacts';
-import { Subscription } from 'rxjs';
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
 import { ContactService } from '../services/contact.service';
-import * as _ from 'lodash';
+import { AppContacts } from './../models/app-contacts';
+import { AppSocialAccount } from './../models/app-social-account';
+import { DisplayService } from './../services/display.service';
 
 @Component({
   selector: 'app-contact-list-form',
@@ -13,17 +14,19 @@ export class ContactListFormComponent implements OnInit {
   tempSocialAccounts: any[] = [];
   @Input('myContacts') myContacts: AppContacts;
 
-  constructor(private contactService: ContactService) { }
+  constructor(private contactService: ContactService, private toaster: DisplayService) { }
 
   ngOnInit() {
   }
 
-  submit(contacts) {
+  submit(contacts: AppContacts) {
     contacts.socialAccounts = this.myContacts.socialAccounts;
-    this.contactService.save(contacts);
+    this.contactService.save(contacts)
+    .then(e => this.toaster.success())
+    .catch(e => this.toaster.error());
   }
 
-  socailAccountAdded(socialAccounts) {
+  socailAccountAdded(socialAccounts: AppSocialAccount[]) {
     this.myContacts.socialAccounts = socialAccounts;
     // console.log(this.socialAccounts);
   }

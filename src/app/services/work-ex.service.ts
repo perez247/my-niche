@@ -1,3 +1,4 @@
+import { AppFireBase } from './../common/app-firebase';
 import { AppExperience } from './../models/app-experience';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
@@ -6,24 +7,18 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class WorkExService {
+export class WorkExService extends AppFireBase {
 
-  constructor(private ngDb: AngularFireDatabase) { }
-
-  save(experienceUser, id= null) {
-    const experience = new AppExperience(experienceUser).props;
-    if (!id) {
-      return this.ngDb.list('public/work-experience').push(experience);
-    }
-    return this.ngDb.object('public/work-experience/' + id).update(experience);
+  constructor(ngDb: AngularFireDatabase) {
+    super(ngDb, 'public/work-experience/');
   }
 
-  getAll() {
-    return this.ngDb.list('public/work-experience/', ref => ref.orderByKey())
-    .snapshotChanges().pipe(map(exp => exp.map(c => (new AppExperience({ key: c.payload.key, ...c.payload.val()}) ))));
+  save(experienceUser, key?) {
+    return this.saveWithKey(experienceUser, key);
   }
 
-  delete(id: string) {
-    return this.ngDb.object('public/work-experience/' + id).remove().then(x => true).catch(e => false);
+  all() {
+    return this.getAll().pipe(map(exp => exp.map(c => (new AppExperience({ ...c }) ))));
   }
+
 }

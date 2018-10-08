@@ -1,0 +1,53 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Work Experience form</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <form #f="ngForm">
+          <div class="form-group">
+            <label for="skillName">Skill Name</label>
+            <input type="text" 
+              required
+              [(ngModel)] = "skillForm && skillForm.skillName" 
+              #skillName = "ngModel"
+              name="skillName" 
+              class="form-control">
+              <div class="alert alert-danger" *ngIf="skillName.touched && skillName.invalid">Skill Name is required</div>
+          </div>
+
+          <div class="form-group">
+              <label for="Description">Description</label>
+              <textarea
+                #description = "ngModel"
+                name="description" 
+                [(ngModel)] = "skillForm && skillForm.description" 
+                class="form-control" 
+                rows="2"></textarea>
+                <div class="alert alert-danger" *ngIf="description.touched && description.invalid">Description is required</div>
+            </div>
+
+            <input [(ngModel)] = "skillForm && skillForm.key" name="key" type="hidden">
+
+          <button [disabled]="!f.valid" (click)="submit(f); modal.close('Close click')"  class="btn btn-primary">Save</button>
+        </form>
+    
+      </div>
+    </ng-template>
+    
+  <button (click)=displayForm(content) class="btn btn-primary">Add a skill</button>
+
+  <hr>
+
+  
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let s of skills$ | async">
+        <app-skill-card 
+          [skill]="s" 
+          (deleteSelectedSkill)="deleteSelected($event)"
+          (selectedSkill)="displaySkill($event, content)"></app-skill-card>
+    </div>
+  </div>

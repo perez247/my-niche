@@ -1,3 +1,5 @@
+import { AppFireBase } from './../common/app-firebase';
+import { Display } from './../common/display';
 import { AppPersonalDetails } from './../models/app-personal-details';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -5,15 +7,17 @@ import { AngularFireDatabase } from 'angularfire2/database';
 @Injectable({
   providedIn: 'root'
 })
-export class PersonalService {
+export class PersonalService extends AppFireBase {
 
-  constructor(private ngDb: AngularFireDatabase) { }
+  constructor(ngDb: AngularFireDatabase) {
+    super(ngDb, '/public/personal-details/');
+   }
 
-  save(personalDetails) {
-    return this.ngDb.object('/public/personal-details').set(personalDetails).then(e => true).catch(e => false);
+  save(personalDetails: AppPersonalDetails) {
+    return this.saveWitoutKey(personalDetails);
   }
 
-  get() {
-    return this.ngDb.object<AppPersonalDetails>('/public/personal-details').valueChanges();
-  }
+  // get() {
+  //   return this.ngDb.object<AppPersonalDetails>('/public/personal-details').valueChanges();
+  // }
 }

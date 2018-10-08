@@ -6,9 +6,9 @@
         <h5>Added social account <small>(Click on icon to remove, then save)</small> </h5>
         <p class="social-media"  >
           <ng-container 
-          *ngIf="myContacts && myContacts.socialAccounts && myContacts.socialAccounts.length > 0; then icons; else noIcons"></ng-container>
+          *ngIf="socialAccounts && socialAccounts.length > 0; then icons; else noIcons"></ng-container>
           <ng-template #icons>
-            <i *ngFor="let c of myContacts.socialAccounts" 
+            <i *ngFor="let c of socialAccounts" 
             (click)="removeSocialAccount(c)"
             class= 'fa {{ c.faIcon }}'
             ></i>

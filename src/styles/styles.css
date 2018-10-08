@@ -2,7 +2,7 @@
 @import '~bootstrap/dist/css/bootstrap.css';
 @import '~font-awesome/css/font-awesome.css';
 @import "~ng-snotify/styles/material.css";
-
+/*  */
 .social-media .fa {
     padding: 10px;
     font-size: 15px;
@@ -24,4 +24,8 @@
 
   .container {
       padding: 20px 10px;
+  }
+
+  .card-header {
+      cursor: pointer;
   }

@@ -1,3 +1,7 @@
+import { DisplayService } from './services/display.service';
+import { EducationService } from './services/education.service';
+import { PersonalProjectService } from './services/personal-project.service';
+import { CertificationService } from './services/certification.service';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -28,6 +32,14 @@ import { SocialAccountFormComponent } from './social-account-form/social-account
 import { WorkExperienceComponent } from './work-experience/work-experience.component';
 import { PersonalProjectFormComponent } from './personal-project-form/personal-project-form.component';
 import { PersonalProjectCardComponent } from './personal-project-card/personal-project-card.component';
+import { SkillsFormComponent } from './skills-form/skills-form.component';
+import { SkillCardComponent } from './skill-card/skill-card.component';
+import { CertificationFormComponent } from './certification-form/certification-form.component';
+import { CertificationCardComponent } from './certification-card/certification-card.component';
+import { EducationFormComponent } from './education-form/education-form.component';
+import { SkillService } from './services/skill.service';
+import { EducationCardComponent } from './education-card/education-card.component';
+import { ProfileFormComponent } from './profile-form/profile-form.component';
 
 @NgModule({
   declarations: [
@@ -44,15 +56,22 @@ import { PersonalProjectCardComponent } from './personal-project-card/personal-p
     WorkExperienceComponent,
     ExpCardComponent,
     PersonalProjectFormComponent,
-    PersonalProjectCardComponent
+    PersonalProjectCardComponent,
+    SkillsFormComponent,
+    SkillCardComponent,
+    CertificationFormComponent,
+    CertificationCardComponent,
+    EducationFormComponent,
+    EducationCardComponent,
+    ProfileFormComponent
   ],
   imports: [
     BrowserModule,
-    SnotifyModule,
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
     CustomFormsModule,
+    SnotifyModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     RouterModule.forRoot([
@@ -69,6 +88,11 @@ import { PersonalProjectCardComponent } from './personal-project-card/personal-p
     SocialAccountService,
     HomeService,
     WorkExService,
+    CertificationService,
+    SkillService,
+    PersonalProjectService,
+    EducationService,
+    DisplayService,
     {provide: NgbDateAdapter, useClass: NgbDateNativeAdapter},
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService

@@ -23,13 +23,6 @@ export class AppExperience {
         return moment(this.endDate).format('YYYY-MMM');
     }
 
-    dateAsObj() {
-        const start = moment(this.startDate).toObject();
-        const end = moment(this.endDate).toObject();
-        this.startDate = {year: start.years, month: start.months, day: 1 };
-        this.endDate = {year: end.years, month: end.months, day: 1 };
-    }
-
     get props() {
         return {
             startDate: moment(this.startDate).toISOString(),

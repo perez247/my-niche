@@ -1,5 +1,10 @@
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
+import { AppPersonalProject } from './../models/app-personal-projects';
+import { DisplayService } from './../services/display.service';
 import { PersonalProjectService } from './../services/personal-project.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -9,23 +14,38 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PersonalProjectFormComponent implements OnInit {
   projects$;
-  project = {};
+  project: AppPersonalProject;
 
-  constructor(private pProjectService: PersonalProjectService) { }
+  constructor(
+    private pProjectService: PersonalProjectService,
+    private toaster: DisplayService,
+    private modelService: NgbModal
+    ) { }
 
   ngOnInit() {
     this.projects$ = this.pProjectService.getAll();
   }
 
-  submit(f) {
-    this.pProjectService.save(f.value, f.value.key);
-    // console.log(f.value);
-    f.reset();
+  submit(f: NgForm) {
+    this.pProjectService.save(f.value, f.value.key)
+    .then(e => {this.toaster.success(); f.reset(); },
+    e => this.toaster.error());
   }
 
-  projectSelected(project) {
+  projectSelected(project, content) {
     // console.log(project);
     this.project = project;
+    this.displayForm(content);
+  }
+
+  deleteSelected(id: string) {
+    this.pProjectService.delete(id)
+    .then(e => this.toaster.success())
+    .catch(e => this.toaster.error());
+  }
+
+  displayForm(content) {
+    this.modelService.open(content, { size: 'lg', windowClass: 'dark-modal' });
   }
 
 }

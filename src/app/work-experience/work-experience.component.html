@@ -1,118 +1,137 @@
-<form #f="ngForm" (ngSubmit)="saveExperience()" [formGroup]="form">
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Work Experience form</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
 
-    <div class="row">
-      <div class="col-sm-6">
-          <div class="form-group">
-            <label for="startDate">Start Date *</label>
-            <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd"
-                       name="startDate" 
-                       formControlName="startDate"
-                       ngbDatepicker 
-                       #dpstartDate="ngbDatepicker"
-                       >
-                <div class="input-group-append">
-                  <button class="btn btn-secondary" (click)="dpstartDate.toggle()" type="button">
-                      <i class="fa fa-calendar" aria-hidden="true"></i>
-                  </button>
+      <form #f="ngForm" [formGroup]="form">
+
+          <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="startDate">Start Date *</label>
+                  <div class="input-group">
+                      <input class="form-control" placeholder="yyyy-mm-dd"
+                            name="startDate" 
+                            formControlName="startDate"
+                            ngbDatepicker 
+                            #dpstartDate="ngbDatepicker"
+                            >
+                      <div class="input-group-append">
+                        <button class="btn btn-secondary" (click)="dpstartDate.toggle()" type="button">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="alert alert-danger" 
+                    *ngIf="form.controls.startDate.touched && form.controls.startDate.invalid">
+                      <div *ngIf="form.controls.startDate.errors?.required">Start Date is required</div>
+                      <div *ngIf="form.controls.startDate.errors?.invalidDateFormat">Date is invalid</div>
+                      <div *ngIf="form.controls.startDate.errors?.invalidDateLogic">Only passed not future date</div>
+                      <div *ngIf="form.controls.startDate.errors?.invalidStartEnd">Start is after end date</div>
+                      <!-- <div *ngIf="startDate.errors.date">Value is not a Date</div>
+                      <div *ngIf="startDate.errors.maxDate || startDate.errors.minDate ">Value is not a valid Date</div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="endDate">End Date *</label>
+                  <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd"
+                          formControlName="endDate"
+                          name="endDate" ngbDatepicker #dpEndDate="ngbDatepicker"
+                          [disabled]="form.controls.startDate.invalid"
+                          >
+                    <div class="input-group-append">
+                      <button class="btn btn-secondary"
+                      [disabled]="form.controls.startDate.invalid"
+                      (click)="dpEndDate.toggle()"  type="button">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="alert alert-danger" 
+                    *ngIf="form.controls.endDate.touched && form.controls.endDate.invalid">
+                      <div *ngIf="form.controls.endDate.errors?.required">Start Date is required</div>
+                      <div *ngIf="form.controls.endDate.errors?.invalidDateFormat">Date is invalid</div>
+                      <div *ngIf="form.controls.endDate.errors?.invalidDateLogic">Only passed not future date</div>
+                      <div *ngIf="form.controls.endDate.errors?.invalidStartEnd">Start is after end date</div>
+                      <!-- <div *ngIf="startDate.errors.date">Value is not a Date</div>
+                      <div *ngIf="startDate.errors.maxDate || startDate.errors.minDate ">Value is not a valid Date</div> -->
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="companyName">Company Name *</label>
+                <input name="companyName" formControlName="companyName" type="text" class="form-control" 
+                >
+                
+                <div class="alert alert-danger" *ngIf="form.controls.companyName.touched && form.controls.companyName.invalid">
+                    <div>Company Name is required</div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="location">Location *</label>
+                  <input  name="location" formControlName="location" type="text" class="form-control">
+                  
+                  <div class="alert alert-danger" *ngIf="form.controls.location.touched && form.controls.location.invalid">
+                    <div>Location is required</div>
+                  </div>
                 </div>
               </div>
-              <div class="alert alert-danger" 
-              *ngIf="form.controls.startDate.touched && form.controls.startDate.invalid">
-                <div *ngIf="form.controls.startDate.errors?.required">Start Date is required</div>
-                <div *ngIf="form.controls.startDate.errors?.invalidDateFormat">Date is invalid</div>
-                <div *ngIf="form.controls.startDate.errors?.invalidDateLogic">Only passed not future date</div>
-                <div *ngIf="form.controls.startDate.errors?.invalidStartEnd">Start is after end date</div>
-                <!-- <div *ngIf="startDate.errors.date">Value is not a Date</div>
-                <div *ngIf="startDate.errors.maxDate || startDate.errors.minDate ">Value is not a valid Date</div> -->
-              </div>
           </div>
-      </div>
-      <div class="col-sm-6">
-          <div class="form-group">
-            <label for="endDate">End Date *</label>
-            <div class="input-group">
-              <input class="form-control" placeholder="yyyy-mm-dd"
-                     formControlName="endDate"
-                     name="endDate" ngbDatepicker #dpEndDate="ngbDatepicker"
-                     [disabled]="form.controls.startDate.invalid"
-                     >
-              <div class="input-group-append">
-                <button class="btn btn-secondary"
-                [disabled]="form.controls.startDate.invalid"
-                 (click)="dpEndDate.toggle()"  type="button">
-                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                </button>
-              </div>
-            </div>
-            <div class="alert alert-danger" 
-              *ngIf="form.controls.endDate.touched && form.controls.endDate.invalid">
-                <div *ngIf="form.controls.endDate.errors?.required">Start Date is required</div>
-                <div *ngIf="form.controls.endDate.errors?.invalidDateFormat">Date is invalid</div>
-                <div *ngIf="form.controls.endDate.errors?.invalidDateLogic">Only passed not future date</div>
-                <div *ngIf="form.controls.endDate.errors?.invalidStartEnd">Start is after end date</div>
-                <!-- <div *ngIf="startDate.errors.date">Value is not a Date</div>
-                <div *ngIf="startDate.errors.maxDate || startDate.errors.minDate ">Value is not a valid Date</div> -->
-              </div>
-          </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label for="companyName">Company Name *</label>
-          <input name="companyName" formControlName="companyName" type="text" class="form-control" 
-          >
-          
-          <div class="alert alert-danger" *ngIf="form.controls.companyName.touched && form.controls.companyName.invalid">
-              <div>Company Name is required</div>
+          <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="role">Role *</label>
+                  <input name="role" type="text" formControlName="role" class="form-control">
+                  <div class="alert alert-danger" *ngIf="form.controls.role.touched && form.controls.role.invalid">
+                    <div>Role is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="achievements">Achievements *</label>
+                    <textarea formControlName="achievements" name="achievements" rows="3" class="form-control"></textarea>
+                    <div class="alert alert-danger" *ngIf="form.controls.achievements.touched && form.controls.achievements.invalid">
+                      <div>Achievements field is required</div>
+                    </div>
+                  </div>
+                </div>
             </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6">
-          <div class="form-group">
-            <label for="location">Location *</label>
-            <input  name="location" formControlName="location" type="text" class="form-control">
+            <input type="hidden" formControlName="key" name="key">
             
-            <div class="alert alert-danger" *ngIf="form.controls.location.touched && form.controls.location.invalid">
-              <div>Location is required</div>
-            </div>
-          </div>
-        </div>
-    </div>
+            <button [disabled]="form.invalid" (click)="saveExperience(); modal.close('Close click')" class="btn btn-primary">Save</button>
+        </form>
 
-    <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="role">Role *</label>
-            <input name="role" type="text" formControlName="role" class="form-control">
-            <div class="alert alert-danger" *ngIf="form.controls.role.touched && form.controls.role.invalid">
-              <div>Role is required</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-              <label for="achievements">Achievements *</label>
-              <textarea formControlName="achievements" name="achievements" rows="3" class="form-control"></textarea>
-              <div class="alert alert-danger" *ngIf="form.controls.achievements.touched && form.controls.achievements.invalid">
-                <div>Achievements field is required</div>
-              </div>
-            </div>
-          </div>
-      </div>
-      <input type="hidden" formControlName="key" name="key">
-      
-      <button [disabled]="form.invalid" class="btn btn-primary">Save</button>
-  </form>
+  </div>
+</ng-template>
 
-  <div class="container">
-      <div class="row">
-          <!-- <app-exp-card [ex]="ex"></app-exp-card> -->
-          <div class="col-sm-4 exp-card" *ngFor="let ex of experiences$ | async">
-              <app-exp-card [ex]="ex" (selectedEx)="displaySelected($event)"></app-exp-card>
-          </div>
-      </div>
+<button (click)=displayForm(content) class="btn btn-primary">Add Work Experience</button>
+
+<hr>
+
+<div class="container">
+  <div class="row">
+      <!-- <app-exp-card [ex]="ex"></app-exp-card> -->
+    <div class="col-sm-4 exp-card" *ngFor="let ex of experiences$ | async">
+        <app-exp-card 
+          [ex]="ex" 
+          (selectedEx)="displaySelected($event, content)"
+          (deletSelectedEx)="deleteSelected($event)"></app-exp-card>
     </div>
+  </div>
+</div>

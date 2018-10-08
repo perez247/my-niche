@@ -1,0 +1,133 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Add Education</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+<form #f="ngForm" [formGroup]="form">
+
+    <div class="row">
+      <div class="col-sm-6">
+          <div class="form-group">
+            <label for="startDate">Start Date *</label>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="startDate" 
+                       formControlName="startDate"
+                       ngbDatepicker 
+                       #dpstartDate="ngbDatepicker"
+                       >
+                <div class="input-group-append">
+                  <button class="btn btn-secondary" (click)="dpstartDate.toggle()" type="button">
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="alert alert-danger" 
+              *ngIf="form.controls.startDate.touched && form.controls.startDate.invalid">
+                <div *ngIf="form.controls.startDate.errors?.required">Start Date is required</div>
+                <div *ngIf="form.controls.startDate.errors?.invalidDateFormat">Date is invalid</div>
+                <div *ngIf="form.controls.startDate.errors?.invalidDateLogic">Only passed not future date</div>
+                <div *ngIf="form.controls.startDate.errors?.invalidStartEnd">Start is after end date</div>
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-6">
+          <div class="form-group">
+            <label for="endDate">End Date (Expected end date) *</label>
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd"
+                     formControlName="endDate"
+                     name="endDate" ngbDatepicker #dpEndDate="ngbDatepicker"
+                     [disabled]="form.controls.startDate.invalid"
+                     >
+              <div class="input-group-append">
+                <button class="btn btn-secondary"
+                [disabled]="form.controls.startDate.invalid"
+                 (click)="dpEndDate.toggle()"  type="button">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            <div class="alert alert-danger" 
+              *ngIf="form.controls.endDate.touched && form.controls.endDate.invalid">
+                <div *ngIf="form.controls.endDate.errors?.required">Start Date is required</div>
+                <div *ngIf="form.controls.endDate.errors?.invalidDateFormat">Date is invalid</div>
+                <div *ngIf="form.controls.endDate.errors?.invalidStartEnd">Start is after end date</div>
+                <!-- <div *ngIf="startDate.errors.date">Value is not a Date</div>
+                <div *ngIf="startDate.errors.maxDate || startDate.errors.minDate ">Value is not a valid Date</div> -->
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="companyName">Institution</label>
+          <input name="companyName" formControlName="institution" type="text" class="form-control" 
+          >
+          
+          <div class="alert alert-danger" *ngIf="form.controls.institution.touched && form.controls.institution.invalid">
+              <div>Institution is required</div>
+            </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+          <div class="form-group">
+            <label for="location">Location *</label>
+            <input  name="location" formControlName="location" type="text" class="form-control">
+            
+            <div class="alert alert-danger" *ngIf="form.controls.location.touched && form.controls.location.invalid">
+              <div>Location is required</div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="role">Course of Study *</label>
+            <input name="role" type="text" formControlName="courseOfStudy" class="form-control">
+            <div class="alert alert-danger" *ngIf="form.controls.courseOfStudy.touched && form.controls.courseOfStudy.invalid">
+              <div>Course of study is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+              <label for="achievements">Grade</label>
+              <input formControlName="grade" name="grade" rows="3" class="form-control"/>
+            </div>
+          </div>
+      </div>
+      <input type="hidden" formControlName="key" name="key">
+      
+      <button [disabled]="form.invalid" (click)="saveEducation(); modal.close('Close click')" class="btn btn-primary">Save</button>
+  </form>
+
+</div>
+</ng-template>
+
+<button (click)=displayForm(content) class="btn btn-primary">Add Education</button>
+
+
+  <hr>
+
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-4 exp-card" *ngFor="let edu of educationList$ | async">
+              <app-education-card 
+              [education]="edu" 
+              (deleteSelected)="deleteSelectedEducation($event)"
+              (selectedEducation)="displaySelected($event, content)"></app-education-card>
+          </div>
+      </div>
+    </div>
+
+  
