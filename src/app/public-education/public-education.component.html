@@ -1,27 +1,6 @@
-<!-- 
-<section id="education" *ngIf="educationList.length > 0">
-  <div class="row ">
-    <div class="container text-center bg-danger"><h1>Education</h1></div>
-  </div>
-  
-  <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <ul class="timeline">
-            <li *ngFor="let edu of educationList">
-              <h5 class="text-primary">{{ edu.courseOfStudy }} {{ edu.grade }}</h5>
-              <p class="float-right">{{ displayService.toDate(edu.startDate) }} to {{ displayService.toDate(edu.endDate) }}</p>
-              <h5>{{ edu.institution }}, <small>{{ edu.location }}</small></h5>
-              <hr>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
 
-</section> -->
 
-<section class="content-section bg-redhead text-white" id="education" *ngIf="educationList.length > 0">
+<section class="content-section bg-dark text-white" id="education" *ngIf="educationList.length > 0">
     <div class="container text-center">
       <div class="content-section-heading">
         <h2 class="mb-5">Education</h2>

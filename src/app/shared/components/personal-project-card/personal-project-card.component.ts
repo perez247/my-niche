@@ -11,7 +11,7 @@ export class PersonalProjectCardComponent implements OnInit {
   @Output('selected') selected = new EventEmitter();
   @Output('deleteSelectedProject') deleteSelectedProject = new EventEmitter();
 
-  constructor(private toaster: DisplayService) { }
+  constructor(public toaster: DisplayService) { }
 
   ngOnInit() {
   }

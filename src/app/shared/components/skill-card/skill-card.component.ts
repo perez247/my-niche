@@ -12,7 +12,7 @@ export class SkillCardComponent implements OnInit {
   @Output('selectedSkill') selectedSkill = new EventEmitter();
   @Output('deleteSelectedSkill') deleteSelectedSkill = new EventEmitter();
 
-  constructor(private toaster: DisplayService) { }
+  constructor(public toaster: DisplayService) { }
 
   ngOnInit() {
   }

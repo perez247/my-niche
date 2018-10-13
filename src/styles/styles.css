@@ -133,11 +133,12 @@
    height: auto;
    padding-top: 8rem;
    padding-bottom: 8rem;
-   /* background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.1)), to(rgba(255, 255, 255, 0.1))), url("../img/bg-masthead.jpg");
-   background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("../img/bg-masthead.jpg"); */
+   background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.1)), to(rgba(255, 255, 255, 0.1))), url('./../assets/images/bg1.jpg');
+   background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url('./../assets/images/bg1.jpg');
    background-position: center center;
    background-repeat: no-repeat;
    background-size: cover;
+   background-attachment: fixed;
  }
  
  .masthead h1 {
@@ -352,7 +353,7 @@
    width: 4rem;
    line-height: 4.3rem;
    font-size: 1.5rem;
-   background-color: #1D809F;
+   background-color: #373A3C;
    -webkit-transition: background-color 0.15s ease-in-out;
    transition: background-color 0.15s ease-in-out;
    -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
