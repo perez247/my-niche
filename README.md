@@ -1,28 +1,51 @@
 # MyNiche
 
-This is a project for showing your C.V. 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
+This is a project for showing your personal information, even when your C.V. is obselete this can be a place to have all recent changes.
 
-## Development server
+## Getting Started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+After downloading, run `npm install` to get dependencies.
 
-## Code scaffolding
+### Firebase setting
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Create a [firebase base](https://console.firebase.google.com/u/1/) database. Add the configuration details to your application environment (both test and production). kindly follow the same format.
 
-## Build
+`
+production: false/true, // exclude this, it is just to show you where the keys should be
+firebase : {
+    apiKey: "xxxx",
+    authDomain: "xxxx",
+    databaseURL: "xxxx",
+    projectId: "xxxx",
+    storageBucket: "xxxx",
+    messagingSenderId: "xxxx"
+  },
+  guest: {
+    email : 'guest-email-address',
+    password : 'guest-password'
+  },
+  maxUsers: 2
+`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Enable the authenticate by username and password in firebase, in the authentication tab.
 
-## Running unit tests
+Next uncomment the register form from login.components.html, the register method from login.components.ts and the register method from auth.service.ts. Then register two users, 1 for admin and the next for guest. (you are only allowed to register only two which can be configured from the environments file), the guest is for viewing the functionality of the admin section but cannot write. 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Store the user credential you consider as guest on the environment file.
 
-## Running end-to-end tests
+The other user credential which is considered as the admin, copy the Uid column as save it as follows: 
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+` 
+{
+  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
+  "rules": {
+    ".read": true,
+    ".write": "auth.uid == 'The-desired-user-Id'",
+    "users": {
+        ".write": "auth.uid == 'The-desired-user-Id'",
+        ".read": "auth.uid == 'The-desired-user-Id'",
+    }
+}
+`
+## Thank you very much
+[My Personal Site](https://ape-niche.firebaseapp.com/)

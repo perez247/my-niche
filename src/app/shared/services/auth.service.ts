@@ -27,19 +27,18 @@ export class AuthService {
      }
 
   // Uncomment these for registration
-  register(value: {email: string, password: string}) {
-    // const users = await this.getUsers().pipe(switchMap(x => x));
-    return this.getUsers().subscribe(x => {
-      if (x.length >= environment.maxUsers) { return false; }
+  // register(value: {email: string, password: string}) {
+  //   return this.getUsers().subscribe(x => {
+  //     if (x.length >= environment.maxUsers) { return false; }
 
-      return this.auth.auth.createUserWithEmailAndPassword(value.email, value.password)
-        .then(b => {
-          this.saveUser({ email: b.user.email }, b.user.uid);
-          return true;
-        })
-        .catch(c => { throw new Error(); });
-    });
-  }
+  //     return this.auth.auth.createUserWithEmailAndPassword(value.email, value.password)
+  //       .then(b => {
+  //         this.saveUser({ email: b.user.email }, b.user.uid);
+  //         return true;
+  //       })
+  //       .catch(c => { throw new Error(); });
+  //   });
+  // }
 
   getUsers() {
     return this.ngDb.list('admin/users/').valueChanges();
