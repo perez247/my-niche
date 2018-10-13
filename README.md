@@ -12,18 +12,31 @@ Create a [firebase base](https://console.firebase.google.com/u/1/) database. Add
 
 `
 production: false/true, // exclude this, it is just to show you where the keys should be
+
 firebase : {
+
     apiKey: "xxxx",
+
     authDomain: "xxxx",
+
     databaseURL: "xxxx",
+
     projectId: "xxxx",
+
     storageBucket: "xxxx",
+
     messagingSenderId: "xxxx"
+
   },
+
   guest: {
+
     email : 'guest-email-address',
+
     password : 'guest-password'
+
   },
+
   maxUsers: 2
 `
 
@@ -37,15 +50,27 @@ The other user credential which is considered as the admin, copy the Uid column 
 
 ` 
 {
+
   /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
+
   "rules": {
+
     ".read": true,
+
     ".write": "auth.uid == 'The-desired-user-Id'",
+
     "users": {
+
         ".write": "auth.uid == 'The-desired-user-Id'",
+
         ".read": "auth.uid == 'The-desired-user-Id'",
+
     }
+
 }
+
 `
+This is the first I have done so please do not hesitate to contact me for enquiries
 ## Thank you very much
+
 [My Personal Site](https://ape-niche.firebaseapp.com/)
