@@ -1,10 +1,10 @@
-.container-fluid {
+/* .container-fluid {
     padding-left: 0;
     padding-right: 0;
-}
+} */
 
 .jumbotron {
-    background: url('./../../assets/images/bg5.jpg');
+    /* background: url('./../../assets/images/bg5.jpg'); */
     /* background: url('https://upload.wikimedia.org/wikipedia/commons/8/85/Nice_Port_1.jpg'); */
     min-height: 600px;
     background-repeat: no-repeat;

@@ -1,13 +1,40 @@
-<div class="container-fluid" *ngIf="publicDetails['personal-details']">
-  <div class="jumbotron text-center">
-    <h1 class="display-3">Hello!</h1>
-    <h2 class="display-5">I'm {{publicDetails['personal-details'].firstName}}</h2>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-    <hr class="my-4">
-    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" routerLink="/about-me"  role="button">About me</a>
-    </p>
-  </div>
-  <app-contacts [contacts]="publicDetails['contacts']"></app-contacts>
+<div *ngIf="publicDetails['personal-details']">
+  <!-- Header -->
+  <header class="masthead d-flex">
+      <div class="container text-center my-auto">
+        <h1 class="mb-1">Hi, I'm {{ publicDetails['personal-details'].firstName }}</h1>
+        <h3 class="mb-5">
+          A Web Developer
+          <hr>
+        </h3>
+        <p>This is my personal site and project using <strong>HTML, CSS, Bootstrap, Angular 6</strong> 
+          for the front end and <strong>firebase</strong> for the back end. You are <strong>free</strong> to log in as a guest
+          and see the <strong>admin</strong> functions.
+        </p>
+      </div>
+      <div class="overlay"></div>
+    </header>
+
+  <app-public-profile [profile] = "publicDetails['profile']"></app-public-profile>
+
+  <app-public-work-experience [experience] = "publicDetails['work-experience']"></app-public-work-experience>
+
+  <app-public-personal-projects [projects] = "publicDetails['personal-projects']"></app-public-personal-projects>
+
+  <app-public-education [educationList] = "publicDetails['educationList']"></app-public-education>
+
+  <section class="bg-primary">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <app-public-skills [skills]="publicDetails['skills']"></app-public-skills>
+        </div>
+        <div class="col-sm-6">
+          <app-public-certification [certifications]="publicDetails['certifications']" ></app-public-certification>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-public-contact [contacts]="publicDetails['contacts']"></app-public-contact>
 </div>

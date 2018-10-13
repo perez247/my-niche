@@ -1,0 +1,23 @@
+
+<div class="container text-center text-white" *ngIf="certifications.length > 0">
+    <section class="content-section">
+      <h3>Certification</h3>
+        <div class="container">
+          
+            <div class="content-parent">
+          
+            <ul class="list-group list-group-flush text-dark text-left">
+                <li class="list-group-item" *ngFor="let cert of certifications">
+                  <h6>{{ cert.name }}</h6>
+                  <p *ngIf="cert.id"> {{ cert.id }}</p>
+                  <p *ngIf="cert.link">
+                    <a href="{{ cert.link }}" target="_blank">link</a>
+                  </p>
+                </li>
+              </ul>
+
+            </div>
+
+        </div>
+      </section>
+</div>

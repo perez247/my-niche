@@ -1,0 +1,14 @@
+.content-parent {
+    max-height: 200px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.content-child {
+    max-height: 250px;
+    margin-right: -50px;
+    padding-right: 50px;
+    overflow-y: scroll;
+}

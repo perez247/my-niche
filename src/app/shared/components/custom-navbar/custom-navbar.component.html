@@ -1,0 +1,30 @@
+<div class="sticky-top custom-navbtn">
+    <div class="row">
+      <div class="col-xs-6" *ngIf="navbarSelected" (click)="toggleNavbar()">
+          <div class="list-group">
+
+              <a routerLink="/" class="list-group-item list-group-item-action">
+                <h3>A-P-E</h3>
+              </a>
+
+              <ng-container *ngIf="AppUser; then loggedIn; else any"></ng-container>
+              <ng-template #any>
+                <a routerLink="/login" class="list-group-item list-group-item-action">Login</a>
+              </ng-template>
+              <ng-template #loggedIn>
+                <a routerLink="/admin" class="list-group-item list-group-item-action">Admin</a>
+                <a (click)="logout()" href="#" class="list-group-item list-group-item-action">logout</a>
+              </ng-template>
+            </div>
+      </div>
+      <div class="col-xs-3" (click)="toggleNavbar()">
+          <span class="btn btn-primary">
+              <i class="fa fa-bars"
+              [class.fa-bars] = "!navbarSelected"
+              [class.fa-times] = "navbarSelected"
+              aria-hidden="true"></i>
+          </span>
+      </div>
+    </div>  
+      
+  </div>

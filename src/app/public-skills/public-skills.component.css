@@ -1,0 +1,4 @@
+.content-parent {
+    max-height: 200px;
+    overflow-y: scroll;
+}

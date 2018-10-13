@@ -1,0 +1,34 @@
+  <!-- <section id="contacts" class="bg-dark text-white">
+      <div class="row ">
+          <div class="col-sm-12 text-center"><h1>Get in touch with me</h1></div>
+        </div>
+        <div>
+          <div class="container text-white">
+              <div class="row">
+                  <div class="col-sm-6">
+                      <p> <i class="fa fa-phone"></i> Phone: {{ contacts.phone }}</p>
+                      <p> <i class="fa fa-envelope"></i> Email: {{ contacts.email }} </p>
+                    </div>
+                    <div class="col-sm-6 social-media">
+                      <a *ngFor="let s of contacts.socialAccounts" href="{{ s.url }}" target="_blank" class="fa {{ s.faIcon }}"></a>
+                    </div>
+                  <hr>
+              </div>
+          </div>
+        </div>
+  </section> -->
+  
+  <footer class="footer text-center">
+      <div class="container">
+        <ul class="list-inline mb-5">
+          <li class="list-inline-item" *ngFor="let s of contacts.socialAccounts">
+            <a class="social-link rounded-circle text-white mr-3" href="{{ s.url }}" target="_blank">
+              <i class="fa {{ s.faIcon }}"></i>
+            </a>
+          </li>
+        </ul>
+        <p class="text-muted small mb-0">
+          <i class="fa fa-phone"></i> : {{ contacts.phone }} 
+          <i class="fa fa-envelope"></i> : {{ contacts.email }}</p>
+      </div>
+    </footer>

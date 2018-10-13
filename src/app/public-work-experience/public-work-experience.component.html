@@ -1,0 +1,84 @@
+
+
+    
+      <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title">{{ selectedEx.role }}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <h6 class="card-title">{{ selectedEx.companyName }}, {{ selectedEx.location }}</h6>
+              <h6 class="card-subtitle text-muted">{{ displayService.toDate(selectedEx.startDate) }} to {{ displayService.toDate(selectedEx.endDate) }}</h6>
+              <hr>
+              <strong><u>Achievements</u></strong>
+              <p>{{ selectedEx.achievements }}</p>
+          </div>
+      </ng-template>
+
+
+
+    <section class="content-section bg-primary text-white text-center" id="work-experience" *ngIf="experience.length > 0">
+        <div class="container">
+          <div class="content-section-heading">
+            <h2 class="mb-5">Relevant Experience</h2>
+          </div>
+          <div class="row">
+            
+        <div class="py-2 content-parent">
+          
+            <div class="content-child">
+        
+        
+              <!-- timeline item 1 -->
+              <div class="row no-gutters" *ngFor="let ex of experience; even as isEven">
+                
+                  <div class="col-sm" *ngIf="isEven"> <!--spacer--> </div>
+                  <!-- timeline item 1 center dot -->
+                  <div class="col-sm-1 text-center flex-column d-none d-sm-flex" *ngIf="isEven">
+                      <div class="row h-50">
+                          <div class="col">&nbsp;</div>
+                          <div class="col">&nbsp;</div>
+                      </div>
+                      <h5 class="m-2">
+                          <span class="badge badge-pill bg-white">&nbsp;</span>
+                      </h5>
+                      <div class="row h-50">
+                          <div class="col border-right">&nbsp;</div>
+                          <div class="col">&nbsp;</div>
+                      </div>
+                  </div>
+                  <!-- timeline item 1 event content -->
+                  <div class="col-sm py-2">
+                      <div class="card shadow">
+                          <div class="card-body clickable" (click)="displayExperience(ex, content)">
+                              <div class="float-right text-muted small">{{ displayService.toDate(ex.startDate) }} to {{ displayService.toDate(ex.endDate) }}</div>
+                              <h4 class="card-title text-muted">{{ex.role}}</h4>
+                              <p class="card-text">{{ ex.companyName }}, {{ ex.location }} <br> <small>{{ displayService.limit(ex.achievements) }}</small></p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-1 text-center flex-column d-none d-sm-flex" *ngIf="!isEven">
+                      <div class="row h-50">
+                          <div class="col border-right">&nbsp;</div>
+                          <div class="col">&nbsp;</div>
+                      </div>
+                      <h5 class="m-2">
+                          <span class="badge badge-pill bg-white">&nbsp;</span>
+                      </h5>
+                      <div class="row h-50">
+                          <div class="col border-right">&nbsp;</div>
+                          <div class="col">&nbsp;</div>
+                      </div>
+                  </div>
+                  <div class="col-sm" *ngIf="!isEven"> <!--spacer--> </div>
+              </div>
+        
+            </div>
+              
+        </div>
+
+          </div>
+        </div>
+      </section>

@@ -1,0 +1,66 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-6">
+      <form class="form-signin" name="signIn" #signInUser="ngForm" (ngSubmit)="login(signInUser)">
+
+
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input 
+          ngModel
+          #emailSignIn = "ngModel"
+          name="emailSignIn" type="emailSignIn" id="inputEmail" class="form-control" placeholder="Email address" required email>
+          <div class="alert alert-danger" *ngIf="emailSignIn.touched && emailSignIn.invalid">
+            <p *ngIf="emailSignIn.errors.required">Email is required</p>
+            <p *ngIf="emailSignIn.errors.email">This is not a valid email</p>
+          </div>
+
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input 
+          ngModel
+          #passwordSignIn = "ngModel"
+          name="passwordSignIn" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          <div class="alert alert-danger" *ngIf="passwordSignIn.touched && passwordSignIn.invalid">Password is required</div>
+        
+        
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <br>
+        
+        <span type="button" (click)="loginAsGuest()" class="btn btn-lg btn-secondary btn-block" type="submit">Sign in as guest</span>
+      </form>
+    </div>
+
+    <!-- <div class="col-6">
+      <form class="form-signin" name="register" #Registeruser="ngForm" (ngSubmit)="registerUser(Registeruser)">
+        <h2 class="form-signin-heading">Register User</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input 
+          ngModel
+          email
+          #email = "ngModel"
+          name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required >
+          <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+              <p *ngIf="email.errors.required">email can not be empty</p>
+              <p *ngIf="email.errors.email">Value is not an email</p>
+          </div>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input 
+         ngModel
+         pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+         #password = "ngModel"
+         name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+         <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+            <p *ngIf="password.errors.required">Password can not be empty</p>
+            <p *ngIf="password.errors.pattern">Should contain upperCase, lowerCase, number/specialchar and min 8 chars</p>
+        </div>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+      </form>
+      </div> -->
+  </div>
+    
+
+  </div> 

@@ -1,0 +1,20 @@
+
+<div class="container text-center text-white" *ngIf="skills.length > 0">
+    <section class="content-section">
+      <h3>Skills</h3>
+        <div class="container">
+          
+            <div class="content-parent">
+          
+            <ul class="list-group list-group-flush text-dark text-left">
+              <li class="list-group-item" *ngFor="let skill of skills">
+                <h6>{{ skill.skillName }}</h6>
+                <p>{{ skill.description }}</p>
+              </li>
+            </ul>
+
+            </div>
+
+        </div>
+      </section>
+</div>

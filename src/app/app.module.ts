@@ -1,69 +1,44 @@
-import { DisplayService } from './services/display.service';
-import { EducationService } from './services/education.service';
-import { PersonalProjectService } from './services/personal-project.service';
-import { CertificationService } from './services/certification.service';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbDateNativeAdapter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { CustomFormsModule } from 'ng2-validation';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { CustomFormsModule } from 'ng2-validation';
+import { CustomNavbarComponent } from 'shared/components/custom-navbar/custom-navbar.component';
+import { SharedModule } from 'shared/shared.module';
 
 import { environment } from './../environments/environment';
-import { AboutMeComponent } from './about-me/about-me.component';
-import { AdminFormComponent } from './admin-form/admin-form.component';
+import { AdminModule } from './admin/admin.module';
+import { AdminFormComponent } from './admin/components/admin-form/admin-form.component';
 import { AppComponent } from './app.component';
-import { ContactListFormComponent } from './contact-list-form/contact-list-form.component';
-import { ContactsComponent } from './contacts/contacts.component';
-import { CustomNavbarComponent } from './custom-navbar/custom-navbar.component';
-import { ExpCardComponent } from './exp-card/exp-card.component';
 import { HomeComponent } from './home/home.component';
-import { PersonalDetailsFormComponent } from './personal-details-form/personal-details-form.component';
-import { ResumeComponent } from './resume/resume.component';
-import { ContactService } from './services/contact.service';
-import { HomeService } from './services/home.service';
-import { PersonalService } from './services/personal.service';
-import { SocialAccountService } from './services/social-account.service';
-import { WorkExService } from './services/work-ex.service';
-import { SocialAccountFormComponent } from './social-account-form/social-account-form.component';
-import { WorkExperienceComponent } from './work-experience/work-experience.component';
-import { PersonalProjectFormComponent } from './personal-project-form/personal-project-form.component';
-import { PersonalProjectCardComponent } from './personal-project-card/personal-project-card.component';
-import { SkillsFormComponent } from './skills-form/skills-form.component';
-import { SkillCardComponent } from './skill-card/skill-card.component';
-import { CertificationFormComponent } from './certification-form/certification-form.component';
-import { CertificationCardComponent } from './certification-card/certification-card.component';
-import { EducationFormComponent } from './education-form/education-form.component';
-import { SkillService } from './services/skill.service';
-import { EducationCardComponent } from './education-card/education-card.component';
-import { ProfileFormComponent } from './profile-form/profile-form.component';
+import { LoginComponent } from './login/login.component';
+import { PublicCertificationComponent } from './public-certification/public-certification.component';
+import { PublicContactComponent } from './public-contact/public-contact.component';
+import { PublicEducationComponent } from './public-education/public-education.component';
+import { PublicPersonalProjectsComponent } from './public-personal-projects/public-personal-projects.component';
+import { PublicProfileComponent } from './public-profile/public-profile.component';
+import { PublicSkillsComponent } from './public-skills/public-skills.component';
+import { PublicWorkExperienceComponent } from './public-work-experience/public-work-experience.component';
+import { AuthGuardService } from './shared/services/auth-guard.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ResumeComponent,
     HomeComponent,
-    AboutMeComponent,
-    AdminFormComponent,
+    LoginComponent,
+    PublicContactComponent,
     CustomNavbarComponent,
-    PersonalDetailsFormComponent,
-    ContactListFormComponent,
-    ContactsComponent,
-    SocialAccountFormComponent,
-    WorkExperienceComponent,
-    ExpCardComponent,
-    PersonalProjectFormComponent,
-    PersonalProjectCardComponent,
-    SkillsFormComponent,
-    SkillCardComponent,
-    CertificationFormComponent,
-    CertificationCardComponent,
-    EducationFormComponent,
-    EducationCardComponent,
-    ProfileFormComponent
+    PublicWorkExperienceComponent,
+    PublicPersonalProjectsComponent,
+    PublicProfileComponent,
+    PublicEducationComponent,
+    PublicSkillsComponent,
+    PublicCertificationComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,28 +46,19 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
     FormsModule,
     ReactiveFormsModule,
     CustomFormsModule,
+    SharedModule,
     SnotifyModule,
+    AdminModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     AngularFireDatabaseModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
-      {path: 'resume', component: ResumeComponent},
-      {path: 'about-me', component: AboutMeComponent},
-
-      {path: 'admin', component: AdminFormComponent},
+      {path: 'admin', component: AdminFormComponent, canActivate: [AuthGuardService]},
+      {path: 'login', component: LoginComponent},
     ])
   ],
   providers: [
-    PersonalService,
-    ContactService,
-    SocialAccountService,
-    HomeService,
-    WorkExService,
-    CertificationService,
-    SkillService,
-    PersonalProjectService,
-    EducationService,
-    DisplayService,
     {provide: NgbDateAdapter, useClass: NgbDateNativeAdapter},
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService
