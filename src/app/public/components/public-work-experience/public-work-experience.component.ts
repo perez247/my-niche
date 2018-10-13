@@ -1,4 +1,4 @@
-import { DisplayService } from './../shared/services/display.service';
+import { DisplayService } from 'shared/services/display.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 

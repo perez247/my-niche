@@ -25,7 +25,7 @@ export class CertificationFormComponent implements OnInit {
   submit(f: NgForm) {
     // console.log(f.value);
     this.certificationService.save(f.value, f.value.key)
-      .then(x => { this.toaster.success(); f.reset(); },
+      .then(x => { f.reset(); this.toaster.success(); },
       e => this.toaster.error());
     // f.reset();
   }

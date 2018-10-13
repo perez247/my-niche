@@ -1,10 +1,7 @@
-import { DisplayService } from 'shared/services/display.service';
-import { HomeService } from '../shared/services/home.service';
-import { ContactService } from '../shared/services/contact.service';
-import { AppPersonalDetails } from '../shared/models/app-personal-details';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PersonalService } from '../shared/services/personal.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { DisplayService } from 'shared/services/display.service';
+import { HomeService } from 'shared/services/home.service';
 
 @Component({
   selector: 'app-home',

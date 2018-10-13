@@ -35,8 +35,8 @@ export class WorkExperienceComponent implements OnInit {
   saveExperience() {
     this.workExService.save(this.form.value, this.form.value.key)
     .then(e => {
-      this.toaster.success();
       this.startForm();
+      this.toaster.success();
     }, e => this.toaster.error());
   }
 

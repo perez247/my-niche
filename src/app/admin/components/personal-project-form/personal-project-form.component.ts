@@ -28,7 +28,7 @@ export class PersonalProjectFormComponent implements OnInit {
 
   submit(f: NgForm) {
     this.pProjectService.save(f.value, f.value.key)
-    .then(e => {this.toaster.success(); f.reset(); },
+    .then(e => { f.reset(); this.toaster.success(); },
     e => this.toaster.error());
   }
 

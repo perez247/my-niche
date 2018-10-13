@@ -20,10 +20,17 @@ import { UserService } from 'shared/services/user.service';
 import { WorkExService } from 'shared/services/work-ex.service';
 
 import { EducationCardComponent } from './components/education-card/education-card.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { CustomFormsModule } from 'ng2-validation';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    CustomFormsModule,
   ],
   declarations: [
     ExpCardComponent,
@@ -33,6 +40,11 @@ import { EducationCardComponent } from './components/education-card/education-ca
     EducationCardComponent,
   ],
   exports: [
+    CommonModule,
+    FormsModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    CustomFormsModule,
     ExpCardComponent,
     PersonalProjectCardComponent,
     SkillCardComponent,

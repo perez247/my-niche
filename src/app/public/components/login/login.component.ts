@@ -1,7 +1,7 @@
-import { AuthService } from '../shared/services/auth.service';
+import { AuthService } from 'shared/services/auth.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { DisplayService } from '../shared/services/display.service';
+import { DisplayService } from 'shared/services/display.service';
 
 @Component({
   selector: 'app-login',

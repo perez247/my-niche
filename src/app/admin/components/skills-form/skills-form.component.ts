@@ -24,7 +24,7 @@ export class SkillsFormComponent implements OnInit {
   submit(f) {
     // console.log(f.value.key);
     this.skillService.save(f.value, f.value.key)
-      .then(e => { this.toaster.success(); f.reset(); },
+      .then(e => { f.reset(); this.toaster.success(); },
       e => this.toaster.error());
   }
 

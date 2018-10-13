@@ -12,7 +12,7 @@ export class EducationCardComponent implements OnInit {
   @Output('selectedEducation') selectedEducation = new EventEmitter();
   @Output('deleteSelected') deleteSelected = new EventEmitter();
 
-  constructor(private displayService: DisplayService) { }
+  constructor(public displayService: DisplayService) { }
 
   ngOnInit() {
   }
